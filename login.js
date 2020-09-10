@@ -36,7 +36,7 @@ app.use(session( {
 passport.use(new GitHubStrategy({
         clientID: "38c770f084b242f947a8",
         clientSecret: "1737c7706845c6b85226212f8f12220965bfc260",
-        callbackURL: "https://sit313-6-3.herokuapp.com/myPage"
+        callbackURL: "https://sit313-6-3.herokuapp.com/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
@@ -54,14 +54,20 @@ app.get('/auth/github',
         console.log(err);
     }));
 
-app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/' }, function (err) {
-        console.log(err);
-    }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/myPage');
-    });
+app.get('/auth/github/callback',(req,res) => {
+    // Successful authentication, redirect home.
+    req.session.sign = true;
+    res.redirect('/myPage');
+});
+
+// app.get('/auth/github/callback',
+//     passport.authenticate('github', { failureRedirect: '/' }, function (err) {
+//         console.log(err);
+//     }),
+//     function(req, res) {
+//         // Successful authentication, redirect home.
+//         res.redirect('/myPage');
+//     });
 
 app.get('/',(req,res) => {
     if (req.session.sign) {
@@ -362,7 +368,7 @@ app.patch('/workers/:id',(req,res) => {
  */
 
 let server = app.listen(process.env.PORT || 8080, function () {
-    console.log("Server is running successfully on Heroku!");
+    console.log("Server is running successfully on Heroku Yes!");
 });
 
 
