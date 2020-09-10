@@ -36,7 +36,7 @@ app.use(session( {
 passport.use(new GitHubStrategy({
         clientID: "38c770f084b242f947a8",
         clientSecret: "1737c7706845c6b85226212f8f12220965bfc260",
-        callbackURL: "https://sit313-6-3.herokuapp.com/auth/github/callback"
+        callbackURL: "https://sit313-6-3.herokuapp.com/myPage"
     },
     function(accessToken, refreshToken, profile, cb) {
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
