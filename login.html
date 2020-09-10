@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>iCrowdTask SignIn</title>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<style>
+    body {
+        z-index: 10;
+        height: 100%;
+        width: 100%;
+        background-color: #040e13;
+        /*background: #fff url(https://ssyerv1.oss-cn-hangzhou.aliyuncs.com/picture/4aa9428c56b14e43af727312836636db.jpg!sswm) no-repeat fixed 20% 20%;*/
+        /*background-size: cover;*/
+    }
+    .background {
+        float: top;
+        z-index: 0;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        /*background: #fff url(https://cdn.pixabay.com/photo/2015/07/02/10/14/star-trails-828656_960_720.jpg) no-repeat fixed 80% 80%;*/
+        background: #fff url(image/background.jpg) no-repeat fixed 80% 80%;
+        background-size: cover;
+        transform: rotateY(180deg);
+    }
+    hr {
+        height: 0px;
+        width: 600px;
+        line-height: 10px;
+        color: white;
+    }
+    hr:hover {
+        line-height: 100px;
+        color: rgba(255,251,240,0.8);
+    }
+
+    .card {
+        background-color: rgba(255,251,240,0.8);
+        border-radius: 16px;
+    }
+    .card:hover {
+        border-radius: 16px;
+        box-shadow: 0 0 8px #fbffe3;
+    }
+
+    h1 {
+        font-size: 80px;
+        font-family: Arial,serif;
+        font-weight: bold;
+        color: #e6f5ff;
+    }
+    h1:hover {
+        font-size: 85px;
+    }
+
+    .copyright {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        height: 45px;
+        width: 100%;
+        background-color: rgba(0,0,10,0);
+        color: #9ea29a;
+    }
+</style>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+</head>
+<div class="background">
+</div>
+<body>
+<form action="/" method="post">
+    <div class="container">
+    <hr>
+        <div class="row">
+        <aside class="col-sm-4">
+        <h4 class="card-title mb-4 mt-1" style="color: rgba(255,251,240,1.0)">iCrowdTask Login</h4>
+            <div class="card">
+            <article class="card-body">
+            <a href="/registration" class="float-right btn btn-outline-primary">Sign up</a>
+            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+            <form>
+                <div class="form-group">
+                    <label>Your email</label>
+                    <input name="myEmail" class="form-control" autocomplete="off" placeholder="Email" type="email">
+                </div><!-- form-group// -->
+                <div class="form-group">
+                    <a class="float-right" href="#">Forgot?</a>
+                    <label>Your password</label>
+                    <input name="myPassword" class="form-control" autocomplete="off" placeholder="******" type="password">
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="checkbox">
+<!--                        <label><input name="checkbox" type="checkbox"> save password </label>-->
+<!--                        <label>The password will be saved for 1 minute</label>-->
+                    </div> <!-- checkbox .// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                    <button class="btn btn-primary btn-block"><a href="/auth/github" style="color: white">Sign In with Github</a></button>
+                </div> <!-- form-group// -->
+            </form>
+            </article>
+            </div> <!-- card.// -->
+            </aside>
+            <div style="float: left; width: 700px; height: 600px; z-index: 30; text-align: right; bottom: 0">
+                <div style="float: top; width: 700px; height: 100px; z-index: 30; text-align: right; bottom: 0">
+                </div>
+                <div style="float: top; width: 700px; height: 500px; z-index: 30; text-align: right; bottom: 0">
+                    <h1>Use iCrowd,</h1>
+                    <h1>Make your Tasks less Crowded.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="copyright">
+    <h6>Copyright: iCrowdTask | Site Author: Yuming</h6>
+    <h6>Background: https://pixabay.com/photos/star-trails-night-long-exposure-828656/</h6>
+</div>
+
+
+</body>
+</html>
