@@ -42,6 +42,7 @@ passport.use(new GitHubStrategy({
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
         //     return cb(err, user);
         // });
+        req.session.sign = true;
         console.log(profile.username);
         console.log(profile.emails[0].value);
         console.log(profile.id);
@@ -361,7 +362,7 @@ app.patch('/workers/:id',(req,res) => {
  */
 
 let server = app.listen(process.env.PORT || 8080, function () {
-    console.log("Server is running successfully!");
+    console.log("Server is running successfully on Heroku!");
 });
 
 
