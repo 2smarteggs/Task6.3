@@ -14,7 +14,7 @@ const PATH="http://localhost:8080";
 
 // github sign-in
 const passport=require("passport");
-const GitHubStrategy = require('passport-github').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 // session
 const session=require("express-session");
 
