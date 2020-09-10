@@ -10,7 +10,7 @@ let mongoose=require('mongoose');
 let validator=require('validator');
 let url=require("url");
 const crypto=require("crypto");
-const PATH="http://localhost:8080";
+const PATH="https://sit313-6-3.herokuapp.com";
 
 // github sign-in
 const passport=require("passport");
@@ -36,7 +36,7 @@ app.use(session( {
 passport.use(new GitHubStrategy({
         clientID: "38c770f084b242f947a8",
         clientSecret: "1737c7706845c6b85226212f8f12220965bfc260",
-        callbackURL: "https://www.baidu.com"
+        callbackURL: "https://sit313-6-3.herokuapp.com/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
