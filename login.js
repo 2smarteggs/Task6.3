@@ -12,9 +12,12 @@ let url=require("url");
 const crypto=require("crypto");
 const PATH="https://sit313-6-3.herokuapp.com";
 
-// github sign-in
+// sign-in with passport
 const passport=require("passport");
+// github sign-in
 const GitHubStrategy = require('passport-github2').Strategy;
+// google sign-in
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // session
 const session=require("express-session");
 
@@ -42,24 +45,51 @@ passport.use(new GitHubStrategy({
         // User.findOrCreate({ githubId: profile.id }, function (err, user) {
         //     return cb(err, user);
         // });
-        req.session.sign = true;
         console.log(profile.username);
         console.log(profile.emails[0].value);
         console.log(profile.id);
     }
 ));
 
+// use google
+passport.use(new GoogleStrategy({
+        clientID: "797962964522-l31lliqeqoqvm95vpvqe6vaav8oq34g2.apps.googleusercontent.com",
+        clientSecret: "z7PZ3MT6945yW2OzcwponBXx",
+        callbackURL: "https://sit313-6-3.herokuapp.com/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+        //     return cb(err, user);
+        // });
+        console.log(profile.id);
+    }
+));
+
+// github login
 app.get('/auth/github',
     passport.authenticate('github', { failureRedirect: '/' }, function (err) {
         console.log(err);
     }));
 
+// google login
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile'] }, function (err) {
+        console.log(err);
+    }));
+
+// github callback
 app.get('/auth/github/callback',(req,res) => {
     // Successful authentication, redirect home.
     req.session.sign = true;
     res.redirect('/myPage');
 });
 
+// google callback
+app.get('/auth/google/callback',(req,res) => {
+    // Successful authentication, redirect home.
+    req.session.sign = true;
+    res.redirect('/myPage');
+});
 // app.get('/auth/github/callback',
 //     passport.authenticate('github', { failureRedirect: '/' }, function (err) {
 //         console.log(err);
