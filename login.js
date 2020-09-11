@@ -164,6 +164,12 @@ app.get('/registration', (req,res) => {
     res.sendFile(__dirname+"/"+"Register.html");
 });
 
+app.get('/myPage/logout', function(req, res){
+    req.session.sign = false;
+    req.logout();
+    res.redirect('/');
+});
+
 // mongo
 mongoose.connect("mongodb+srv://admin_Yuming:Aa56112756@cluster0.sobtl.mongodb.net/myDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
 
