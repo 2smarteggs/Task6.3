@@ -189,11 +189,12 @@ app.post('/',(req, res) => {
     }, function (err, data) {
         if(err) throw err;
         if(data){
-            // // If the user have selected save password
-            // if (req.body.checkbox === 'on') {
-            //     // set cookie
-            //     req.session.sign = true;
-            // }
+            // If the user have selected save password for 1 week
+            if (req.body.checkbox === 'on') {
+                // make cookie longer
+                console.log("longer");
+                req.session.cookie.maxAge = 172800000; // 2d
+            }
             req.session.sign = true;
             // res.sendFile(__dirname + "/reqtask.html");
             res.redirect('/myPage');
