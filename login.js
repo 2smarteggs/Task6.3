@@ -20,6 +20,12 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // session
 const session=require("express-session");
+// https://sit313-6-3.herokuapp.com/resetPassword
+
+// forget password
+let nodemailer = require('nodemailer');
+let smtpTransport = require('nodemailer-smtp-transport');
+let config = require('./config');
 
 // set router
 let app = express();
@@ -98,6 +104,40 @@ app.get('/auth/google/callback',(req,res) => {
 //         // Successful authentication, redirect home.
 //         res.redirect('/myPage');
 //     });
+
+// forget password page
+app.get('/forgetPassword',(req,res) => {
+    res.sendFile(__dirname+"/"+"forgetPassword.html");
+});
+app.post('/forgetPassword',(req,res) => {
+    sendMail(req.body.myEmail, 'iCrowdTask Password Reset', '<h1>Please click the following link to reset password:</h1> <a href="https://sit313-6-3.herokuapp.com/resetPassword">https://sit313-6-3.herokuapp.com/resetPassword</a>');
+    res.send("A reset Email will be sent to your account in a few minutes, It may be in the TRASH BIN also!");
+});
+
+// reset password page
+app.get('/resetPassword',(req,res) => {
+    res.sendFile(__dirname+"/"+"resetPassword.html");
+});
+app.post('/resetPassword',(req,res) => {
+
+    // encrypt the password
+    let md5=crypto.createHash("md5");
+    let hashedPassword=md5.update(req.body.myPassword).digest("hex");
+    console.log(hashedPassword);
+
+    User.updateOne({"email": req.body.myEmail}, {"password": hashedPassword}, function (err, data) {
+        if(err) throw err;
+        if(data){
+            // const returnJSON = {"status": "true"};
+            // res.end(JSON.stringify(returnJSON));
+            res.redirect('/');
+        }else{
+            // const returnJSON = {"status": "false"};
+            // res.end(JSON.stringify(returnJSON));
+            res.end("ERROR");
+        }
+    });
+});
 
 app.get('/',(req,res) => {
     if (req.session.sign) {
@@ -413,3 +453,30 @@ function showMessage(message,res){
     res.send(result);
 }
 
+// email sending
+smtpTransport = nodemailer.createTransport(smtpTransport({
+    service: config.email.service,
+    auth: {
+        user: config.email.user,
+        pass: config.email.pass
+    }
+}));
+
+let sendMail = function (recipient, subject, html) {
+
+    smtpTransport.sendMail({
+
+        from: config.email.user,
+        to: recipient,
+        subject: subject,
+        html: html
+
+    }, function (error, response) {
+        if (error) {
+            console.log(error);
+        }
+        console.log('发送成功');
+    });
+}
+
+module.exports = sendMail;
