@@ -130,7 +130,7 @@ app.post('/resetPassword',(req,res) => {
         if(data){
             // const returnJSON = {"status": "true"};
             // res.end(JSON.stringify(returnJSON));
-            res.redirect('https://sit313-6-3.herokuapp.com');
+            res.redirect('/');
         }else{
             // const returnJSON = {"status": "false"};
             // res.end(JSON.stringify(returnJSON));
