@@ -86,6 +86,7 @@ app.get('/auth/google',
 // github callback
 app.get('/auth/github/callback',(req,res) => {
     // Successful authentication, redirect home.
+    req.session.cookie.maxAge = 172800000; // 2d
     req.session.sign = true;
     res.redirect('/myPage');
 });
@@ -93,6 +94,7 @@ app.get('/auth/github/callback',(req,res) => {
 // google callback
 app.get('/auth/google/callback',(req,res) => {
     // Successful authentication, redirect home.
+    req.session.cookie.maxAge = 172800000; // 2d
     req.session.sign = true;
     res.redirect('/myPage');
 });
